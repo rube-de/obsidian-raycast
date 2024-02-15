@@ -334,6 +334,7 @@ export enum ObsidianTargetType {
   DailyNoteAppend = "obsidian://advanced-uri?daily=true&mode=append",
   NewNote = "obsidian://new?vault=",
   AppendTask = "obsidian://advanced-uri?mode=append&filepath=",
+  QuickAdd = "obsidian://advanced-uri?commandid=quickadd%253ArunQuickAdd&vault=",
 }
 
 export type ObsidianTarget =
@@ -349,7 +350,8 @@ export type ObsidianTarget =
       path: string;
       heading?: string;
       silent?: boolean;
-    };
+    }
+  | { type: ObsidianTargetType.QuickAdd; vault: Vault };
 
 export function getObsidianTarget(target: ObsidianTarget) {
   switch (target.type) {
@@ -396,6 +398,9 @@ export function getObsidianTarget(target: ObsidianTarget) {
         headingParam +
         (target.silent ? "&openmode=silent" : "")
       );
+    }
+    case ObsidianTargetType.QuickAdd: {
+      return ObsidianTargetType.QuickAdd + encodeURIComponent(target.vault.name);
     }
     default: {
       return "";

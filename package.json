@@ -565,6 +565,13 @@
           "type": "checkbox"
         }
       ]
+    },
+    {
+      "name": "runQuickAddCommand",
+      "title": "Run QuickAdd",
+      "subtitle": "Obsidian",
+      "description": "Run QuickAdd",
+      "mode": "view"
     }
   ],
   "dependencies": {
